@@ -9,6 +9,10 @@
     <packaging>jar</packaging>
 
     <name>MagTek MTUSDK</name>
+
+    <build>
+        <finalName>libMTUSDK</finalName>
+    </build>
          
     <dependencies>
          <dependency>
