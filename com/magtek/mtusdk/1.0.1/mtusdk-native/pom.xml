@@ -11,7 +11,7 @@
     </parent>
 
     <groupId>com.magtek</groupId>
-    <artifactId>native</artifactId>
+    <artifactId>mtusdk-native</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
 
@@ -19,7 +19,7 @@
         <!-- Define the native library for Linux -->
         <dependency>
             <groupId>com.magtek</groupId>
-            <artifactId>mtusdk-native</artifactId>
+            <artifactId>mtusdk-native-linux</artifactId>
             <version>1.0.1</version>
             <classifier>linux-x86_64</classifier>
             <scope>runtime</scope>
@@ -28,7 +28,7 @@
         <!-- Define the native library for Windows -->
         <dependency>
             <groupId>com.magtek</groupId>
-            <artifactId>mtusdk-native</artifactId>
+            <artifactId>mtusdk-native-winows</artifactId>
             <version>1.0.1</version>
             <classifier>windows-x86_64</classifier>
             <scope>runtime</scope>

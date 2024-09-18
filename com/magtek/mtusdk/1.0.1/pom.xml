@@ -7,9 +7,10 @@
     <artifactId>mtusdk-sdk-parent</artifactId>
     <version>1.0.1</version>
     <packaging>pom</packaging>
+	<name>MagTek SDK</name>
 
     <modules>
-        <module>java</module>
+        <module>mtusdk-java</module>
         <module>native</module>
     </modules>
 </project>
