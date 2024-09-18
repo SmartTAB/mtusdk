@@ -4,21 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.magtek</groupId>
-    <artifactId>mtusdk</artifactId>
+    <artifactId>mtusdk-sdk-parent</artifactId>
     <version>1.0.1</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
-    <name>MagTek MTUSDK</name>
-
-    <build>
-        <finalName>libMTUSDK</finalName>
-    </build>
-         
-    <dependencies>
-         <dependency>
-            <groupId>com.googlecode.json-simple</groupId>
-            <artifactId>json-simple</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-    </dependencies>
+    <modules>
+        <module>java</module>
+        <module>native</module>
+    </modules>
 </project>
