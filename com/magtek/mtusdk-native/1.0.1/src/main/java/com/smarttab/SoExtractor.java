@@ -10,27 +10,30 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SoExtractor {
     public static void main(String[] args) {
-        new SoExtractor().extract();
+        System.out.println(new SoExtractor().extract());
     }
 
-    public void extract() {
-        Stream.of("libMTUSDKJ.so",
+    public Set<URL> extract() {
+        return Stream.of("libMTUSDKJ.so",
                         "libmtmms.so",
                         "libmtscra.so",
                         "libmtusdk.a")
                 .map(getClass()::getResource)
                 .filter(Objects::nonNull)
-                .forEach(this::copyIfNecessary);
+                .peek(this::copyIfNecessary)
+                .collect(Collectors.toSet());
     }
 
     /**
      * Copies a resource file to the destination if it is absent or different.
      */
-    private void copyIfNecessary(final URL resourceUrl) {
+    private URL copyIfNecessary(final URL resourceUrl) {
         try {
             Path destinationPath = Paths.get(".", new File(resourceUrl.getPath()).getName()); // Target root folder
             if (shouldCopyFile(resourceUrl, destinationPath)) {
@@ -39,6 +42,7 @@ public class SoExtractor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return resourceUrl;
     }
 
     /**
