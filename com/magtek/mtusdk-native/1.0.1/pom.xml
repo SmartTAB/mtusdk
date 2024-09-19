@@ -32,14 +32,24 @@
         </pluginManagement>
 
         <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version> 
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target> 
+				</configuration>
+			</plugin>
 			<!-- Maven JAR Plugin to control the JAR name and include resources -->
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
 				<version>3.2.0</version>
 				<configuration>
+ 
 					<archive>
 						<manifest>
-							<mainClass>com.smarttab.Main</mainClass> <!-- Your main class here -->
+							<mainClass>com.smarttab.SoExtractor</mainClass> <!-- Your main class here -->
 						</manifest>
 					</archive>
 					<!-- Specify the final name of the JAR -->
