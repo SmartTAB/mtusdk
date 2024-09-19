@@ -19,30 +19,32 @@ public class SoExtractor {
         System.out.println(new SoExtractor().extract());
     }
 
-    public Set<URL> extract() {
+    public Set<Path> extract() {
         return Stream.of("libMTUSDKJ.so",
                         "libmtmms.so",
                         "libmtscra.so",
                         "libmtusdk.a")
                 .map(getClass()::getResource)
                 .filter(Objects::nonNull)
-                .peek(this::copyIfNecessary)
+                .map(this::copyIfNecessary)
+				.filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 
     /**
      * Copies a resource file to the destination if it is absent or different.
      */
-    private URL copyIfNecessary(final URL resourceUrl) {
+    private Path copyIfNecessary(final URL resourceUrl) {
+		Path destinationPath = null;
         try {
-            Path destinationPath = Paths.get(".", new File(resourceUrl.getPath()).getName()); // Target root folder
+            destinationPath = Paths.get(".", new File(resourceUrl.getPath()).getName()); // Target root folder
             if (shouldCopyFile(resourceUrl, destinationPath)) {
                 copyFile(resourceUrl, destinationPath);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return resourceUrl;
+        return destinationPath;
     }
 
     /**
