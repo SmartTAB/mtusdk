@@ -27,7 +27,7 @@ public class SoExtractor {
                 .map(getClass()::getResource)
                 .filter(Objects::nonNull)
                 .map(this::copyIfNecessary)
-				.filter(Objects::nonNull)
+                .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
     }
 
@@ -35,9 +35,9 @@ public class SoExtractor {
      * Copies a resource file to the destination if it is absent or different.
      */
     private Path copyIfNecessary(final URL resourceUrl) {
-		Path destinationPath = null;
+        Path destinationPath = null;
         try {
-            destinationPath = Paths.get(".", new File(resourceUrl.getPath()).getName()); // Target root folder
+            destinationPath = resolveDestinationPath(resourceUrl); // Target root folder
             if (shouldCopyFile(resourceUrl, destinationPath)) {
                 copyFile(resourceUrl, destinationPath);
             }
@@ -45,6 +45,12 @@ public class SoExtractor {
             e.printStackTrace();
         }
         return destinationPath;
+    }
+
+    private Path resolveDestinationPath(final URL resourceUrl) {
+        final Path fileName = Paths.get(new File(resourceUrl.getPath()).getName()).normalize();
+        final Path rootFolder = Paths.get(new File(SoExtractor.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath()).normalize();
+        return (rootFolder.getFileName().toString().contains(".jar") ? rootFolder.getParent() : rootFolder).resolve(fileName);
     }
 
     /**
@@ -76,3 +82,4 @@ public class SoExtractor {
         }
     }
 }
+
