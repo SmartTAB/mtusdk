@@ -24,17 +24,19 @@ This repository provides versioned sets of `.so` and `.jar` files for easy distr
     </repository>
 </repositories>
 
+
 <!-- Java dependency -->
 <dependency>
-    <groupId>com.magtek</groupId>
-    <artifactId>mtusdk-java</artifactId>
-    <version>1.0.1</version>
+	<groupId>com.magtek</groupId>
+	<artifactId>mtusdk-java</artifactId>
+	<version>preliminary-2024-09-05</version>
 </dependency>
 
 <!-- Native Linux .so files -->
 <dependency>
-    <groupId>com.magtek</groupId>
-    <artifactId>mtusdk-native</artifactId>
-    <version>1.0.1</version>
-    <classifier>linux-x86_64</classifier> 
+	<groupId>com.magtek</groupId>
+	<artifactId>mtusdk-native</artifactId>
+	<version>preliminary-2024-09-05</version>
+	<classifier>linux-x86_64</classifier>
 </dependency>
+```
