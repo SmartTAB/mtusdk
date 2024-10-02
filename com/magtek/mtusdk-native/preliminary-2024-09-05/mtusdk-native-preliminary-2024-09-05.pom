@@ -1,0 +1,11 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.magtek</groupId>
+    <artifactId>mtusdk-native</artifactId>
+    <version>preliminary-2024-09-05</version>
+    <packaging>jar</packaging> <!-- For native files, you use POM packaging -->
+	<description>Native libraries for mtusdk, packaged in a zip file for linux-x86_64 platform</description>
+</project>
