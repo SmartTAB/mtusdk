@@ -15,15 +15,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class SoExtractor {
+
+    private final static String NAME_MT_USDK_J = "libMTUSDKJ.so";
+    private final static String NAME_MT_MMS = "libmtmms.so";
+    private final static String NAME_MT_SCRA = "libmtscra.so";
+
     public static void main(String[] args) {
         System.out.println(new SoExtractor().extract());
     }
 
     public Set<Path> extract() {
-        return Stream.of("libMTUSDKJ.so",
-                        "libmtmms.so",
-                        "libmtscra.so",
-                        "libmtusdk.a")
+        return Stream.of(NAME_MT_USDK_J,
+                        NAME_MT_MMS,
+                        NAME_MT_SCRA)
                 .map(getClass()::getResource)
                 .filter(Objects::nonNull)
                 .map(this::copyIfNecessary)
@@ -49,8 +53,13 @@ public class SoExtractor {
 
     private Path resolveDestinationPath(final URL resourceUrl) {
         final Path fileName = Paths.get(new File(resourceUrl.getPath()).getName()).normalize();
-        final Path rootFolder = Paths.get(new File(SoExtractor.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath()).normalize();
-        return (rootFolder.getFileName().toString().contains(".jar") ? rootFolder.getParent() : rootFolder).resolve(fileName);
+        if (NAME_MT_USDK_J.equals(fileName.toString())) {
+            final Path rootFolder = Paths.get(new File(SoExtractor.class.getProtectionDomain().getCodeSource().getLocation().getPath()).getAbsolutePath()).normalize();
+            return (rootFolder.getFileName().toString().contains(".jar") ? rootFolder.getParent() : rootFolder).resolve(fileName);
+        } else if (NAME_MT_MMS.equals(fileName.toString()) || NAME_MT_SCRA.equals(fileName.toString())) {
+            return Paths.get(".", new File(resourceUrl.getPath()).getName()); // Target root folder
+        }
+        throw new IllegalArgumentException("Unsupported file name:" + fileName.toString());
     }
 
     /**
@@ -82,4 +91,3 @@ public class SoExtractor {
         }
     }
 }
-
