@@ -2,7 +2,9 @@
 
 ## Repository Overview
 
-This repository provides versioned sets of `.so` and `.jar` files for easy distribution to client production and development systems. You can update POS systems and manage different file versions seamlessly when MagTek releases new updates. The `mtusdk-native` module includes the `SoExtractor` class, which extracts `.so` files to the root directory. Files will only be replaced if their sizes differ from the existing files. The client system must add the extraction path to the classpath.
+MagTek provides updates as zip-archives with Java and Linux SDK. This project makes it possible to use these SDKs as maven dependencies (see usage example below). 
+
+This repository provides versioned sets of `.so` and `.jar` files for easy distribution to client production and development systems. You can update POS systems and manage different file versions seamlessly when MagTek releases new updates. The `mtusdk-native` module includes the `SoExtractor` class, which extracts `.so` files to the root directory. Root directory - where these `.so` files can be loaded from. There is a list of path it searches for `.so` files to load and current directory is one among them. We cannot specify a random path to the `.so` files, because it's not supported in the MAgTek's SDK. Files will only be replaced if their sizes differ from the existing files. The client system must add the extraction path to the classpath.
 
 ## Project Structure
 
