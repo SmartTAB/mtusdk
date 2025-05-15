@@ -10,6 +10,8 @@ This repository provides versioned sets of `.so` and `.jar` files for easy distr
 
 - **`mtusdk/com/magtek/mtusdk-native`**: This contains the compiled `.so` files based on the [MagTek Universal SDK for MMS Devices (Linux) - PN 1000009347](https://www.magtek.com/Content/SoftwarePackages/1000009347.zip). This Maven library also includes a self-extraction API, and it can be run from the command line for testing.
 
+- **`mtaesdukpt-native`**: This contains the compiled `.so` files based on MagTek DKUPT AES project to decrypt card holder name and expiration date.
+
 ## Usage Instructions
 
 ```xml
@@ -37,6 +39,13 @@ This repository provides versioned sets of `.so` and `.jar` files for easy distr
 	<groupId>com.magtek</groupId>
 	<artifactId>mtusdk-native</artifactId>
 	<version>preliminary-2024-09-05</version>
+	<classifier>linux-x86_64</classifier>
+</dependency>
+
+<dependency>
+	<groupId>com.magtek</groupId>
+	<artifactId>mtaesdukpt-native</artifactId>
+	<version>1000009782-101</version>
 	<classifier>linux-x86_64</classifier>
 </dependency>
 ```
