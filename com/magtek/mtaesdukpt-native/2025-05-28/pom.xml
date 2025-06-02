@@ -1,0 +1,80 @@
+<!-- WARN: This pom is used to generate jar file with SO files inside -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.smarttab</groupId>
+    <artifactId>st-so-aes-unpacker</artifactId>
+    <version>2025-05-28</version>
+
+    <packaging>jar</packaging>
+    <name>SOAESUNPACKER</name>
+
+    <organization>
+        <name>SmartTAB</name>
+    </organization>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>1.8</java.version>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+		<magtek.version.name>2025-05-28</magtek.version.name>
+    </properties>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-assembly-plugin</artifactId>
+                    <version>${assembly.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version> 
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target> 
+				</configuration>
+			</plugin>
+			<!-- Maven JAR Plugin to control the JAR name and include resources -->
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+ 
+					<archive>
+						<manifest>
+							<mainClass>com.smarttab.SoAesDukptExtractor</mainClass> <!-- Your main class here -->
+						</manifest>
+					</archive>
+					<!-- Specify the final name of the JAR -->
+					<finalName>mtaesdukpt-native-${magtek.version.name}-linux-x86_64</finalName>
+					<!-- Place the JAR in the root directory -->
+					<outputDirectory>${project.basedir}</outputDirectory>
+				</configuration>
+			</plugin>
+        </plugins>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*.so</include>
+                </includes>
+            </resource>
+        </resources>
+
+    </build>
+
+    <dependencies>
+    </dependencies>
+
+</project>
